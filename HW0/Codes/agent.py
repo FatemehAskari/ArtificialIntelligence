@@ -1,0 +1,235 @@
+import random
+
+
+#################################################################################
+# Functions
+#################################################################################
+
+def ai_action(game_state):
+    ''' Generate and play move from tic tac toe AI'''
+    #################################################################################
+    # "*** YOUR CODE HERE ***"
+    ################################################################################# 
+    if game_state.count(2) > 0:
+        return
+    for i in range(0,25):
+        
+        #to win
+        # horizontal                             
+        if i%5==0 and game_state[i]==False and game_state[i+1]==False and game_state[i+2]==False and game_state[i+3] is None:
+            return i+3
+        elif i%5==0 and game_state[i]==False and game_state[i+1]==False and game_state[i+3]==False and game_state[i+2] is None:
+            return i+2
+        elif i%5==0 and game_state[i]==False and game_state[i+2]==False and game_state[i+3]==False and game_state[i+1] is None:
+            return i+1
+        elif i%5==1 and game_state[i]==False and game_state[i+2]==False and game_state[i+3]==False and game_state[i+1] is None:
+            return i+1
+        elif i%5==1 and game_state[i]==False and game_state[i+1]==False and game_state[i+2]==False and game_state[i+3] is None:
+            return i+3 
+        elif i%5==1 and game_state[i]==False and game_state[i+1]==False and game_state[i+2]==False and game_state[i-1] is None:
+            return i-1                
+        elif i%5==2 and game_state[i]==False and game_state[i+1]==False and game_state[i+2]==False and game_state[i-1] is None:
+            return i-1
+        # vertical
+        
+        if i==0 or i==1 or i==2 or i==3 or i==4:                                  
+            if game_state[i]==False  and game_state[i+5]==False and game_state[i+10]==False and game_state[i+15] is None:
+                return i+15
+            if game_state[i]==False  and game_state[i+5]==False and game_state[i+15]==False and game_state[i+10] is None:
+                return i+10
+            if game_state[i]==False  and game_state[i+10]==False and game_state[i+15]==False and game_state[i+5] is None:
+                return i+5
+            if game_state[i+5]==False  and game_state[i+10]==False and game_state[i+15]==False and game_state[i+20] is None:
+                return i+20
+            if game_state[i+5]==False  and game_state[i+10]==False and game_state[i+15]==False and game_state[i] is None:
+                return i                       
+            if game_state[i+5]==False and  game_state[i+15]==False and game_state[i+20]==False  and  game_state[i+10] is None:
+                return i+10
+            if game_state[i+10]==False and game_state[i+15]==False and game_state[i+20]==False and game_state[i+5] is None:
+                return i+5 
+            
+                       
+        #diagonal
+            
+        if i==0 or i==5 or i==1 or i==6 :
+            x=6
+        if i==4 or i==3 or i==9 or i==8:
+            x=4
+        if i==0 or i==4:
+            if game_state[i]==False and game_state[i+x]==False and game_state[i+2*x]==False and game_state[i+3*x] is None:
+                return i+3*x
+            if game_state[i]==False and game_state[i+x]==False and game_state[i+3*x]==False and game_state[i+2*x] is None:
+                return i+2*x
+            if game_state[i]==False and game_state[i+2*x]==False and game_state[i+3*x]==False and game_state[i+x] is None:
+                return i+x
+            if game_state[i+x]==False and game_state[i+3*x]==False and game_state[i+4*x]==False and game_state[i+2*x] is None:
+                return i+2*x
+            if game_state[i+x]==False and game_state[i+2*x]==False and game_state[i+3*x]==False and game_state[i+4*x] is None:
+                return i+4*x
+            if game_state[i+x]==False and game_state[i+2*x]==False and game_state[i+3*x]==False and game_state[i] is None:
+                return i                        
+            if game_state[i+2*x]==False and game_state[i+3*x]==False and game_state[i+4*x]==False and game_state[i+x] is None:
+                return i+x
+        if i==1 or i==5 or i==3 or i==9:
+            if game_state[i]==False and game_state[i+x]==False and game_state[i+2*x]==False and game_state[i+3*x] is None:
+                return i+3*x
+            if game_state[i]==False and game_state[i+x]==False and game_state[i+3*x]==False and game_state[i+2*x] is None:
+                return i+2*x
+            if game_state[i]==False and game_state[i+2*x]==False and game_state[i+3*x]==False and game_state[i+x] is None:
+                return i+x
+            if game_state[i+x]==False and game_state[i+2*x]==False and game_state[i+3*x]==False and game_state[i] is None:
+                return i                          
+        
+        #not to lose
+        # horizontal                
+        if i%5==1 and game_state[i] and game_state[i+2] and game_state[i+1] is None:
+            return i+1
+        elif i%5==1 and game_state[i] and game_state[i+1] and game_state[i+2] is None:
+            return i+2
+        elif i%5==2 and game_state[i] and game_state[i+1] and game_state[i-1] is None:
+            return i-1                
+        elif i%5==0 and game_state[i] and game_state[i+1] and game_state[i+2] and game_state[i+3] is None:
+            return i+3
+        elif i%5==0 and game_state[i] and game_state[i+1] and game_state[i+3] and game_state[i+2] is None:
+            return i+2
+        elif i%5==0 and game_state[i] and game_state[i+2] and game_state[i+3] and game_state[i+1] is None:
+            return i+1
+        elif i%5==1 and game_state[i] and game_state[i+2] and game_state[i+3] and game_state[i+1] is None:
+            return i+1
+        elif i%5==1 and game_state[i] and game_state[i+1] and game_state[i+2] and game_state[i+3] is None:
+            return i+3 
+        elif i%5==1 and game_state[i] and game_state[i+1] and game_state[i+2] and game_state[i-1] is None:
+            return i-1                
+        elif i%5==2 and game_state[i] and game_state[i+1] and game_state[i+2] and game_state[i-1] is None:
+            return i-1
+        
+        # vertical
+        
+        if i==0 or i==1 or i==2 or i==3 or i==4:
+            if game_state[i+5] and game_state[i+15] and game_state[i+10] is None:
+                return i+10
+            if game_state[i+5] and game_state[i+10] and game_state[i+15] is None:
+                return i+15
+            if game_state[i+10] and game_state[i+15] and game_state[i+5] is None:
+                return i+5  
+                                  
+            if game_state[i]  and game_state[i+5] and game_state[i+10] and game_state[i+15]  is None:
+                return i+15
+            if game_state[i]  and game_state[i+5] and game_state[i+15] and game_state[i+10]  is None:
+                return i+10
+            if game_state[i]  and game_state[i+10] and game_state[i+15] and game_state[i+5]  is None:
+                return i+5
+            if game_state[i+5]  and game_state[i+10] and game_state[i+15] and game_state[i+20]  is None:
+                return i+20
+            if game_state[i+5]  and game_state[i+10] and game_state[i+15] and game_state[i]  is None:
+                return i                       
+            if game_state[i+5] and  game_state[i+15] and game_state[i+20]  and  game_state[i+10] is None:
+                return i+10
+            if game_state[i+10] and game_state[i+15] and game_state[i+20] and game_state[i+5] is None:
+                return i+5 
+            
+                       
+        #diagonal
+            
+        if i==0 or i==5 or i==1 or i==6 :
+            x=6
+        if i==4 or i==3 or i==9 or i==8:
+            x=4
+        if i==0 or i==4:
+            if game_state[i+x] and game_state[i+2*x] and game_state[i+3*x] is None:
+                return i+3*x
+            if game_state[i+2*x] and game_state[i+3*x] and game_state[i+x] is None:
+                return i+x                         
+            if game_state[i+x] and game_state[i+3*x] and game_state[i+2*x] is None:
+                return i+2*x
+            if game_state[i] and game_state[i+x] and game_state[i+2*x] and game_state[i+3*x] is None:
+                return i+3*x
+            if game_state[i] and game_state[i+x] and game_state[i+3*x] and game_state[i+2*x] is None:
+                return i+2*x
+            if game_state[i] and game_state[i+2*x] and game_state[i+3*x] and game_state[i+x] is None:
+                return i+x
+            if game_state[i+x] and game_state[i+3*x] and game_state[i+4*x] and game_state[i+2*x] is None:
+                return i+2*x
+            if game_state[i+x] and game_state[i+2*x] and game_state[i+3*x] and game_state[i+4*x] is None:
+                return i+4*x
+            if game_state[i+x] and game_state[i+2*x] and game_state[i+3*x] and game_state[i] is None:
+                return i                        
+            if game_state[i+2*x] and game_state[i+3*x] and game_state[i+4*x] and game_state[i+x] is None:
+                return i+x
+        if i==1 or i==5 or i==3 or i==9:
+            if game_state[i] and game_state[i+x] and game_state[i+2*x] and game_state[i+3*x] is None:
+                return i+3*x
+            if game_state[i] and game_state[i+x] and game_state[i+3*x] and game_state[i+2*x] is None:
+                return i+2*x
+            if game_state[i] and game_state[i+2*x] and game_state[i+3*x] and game_state[i+x] is None:
+                return i+x
+            if game_state[i+x] and game_state[i+2*x] and game_state[i+3*x] and game_state[i] is None:
+                return i
+        #for win    
+        if i%5==1 and game_state[i]==False and game_state[i+2]==False and game_state[i+1] is None:
+            return i+1
+        if i%5==1 and game_state[i]==False and game_state[i+1]==False and game_state[i+2] is None:
+            return i+2
+        if i%5==2 and game_state[i]==False and game_state[i+1]==False and game_state[i-1] is None:
+            return i-1
+        if i==0 or i==1 or i==2 or i==3 or i==4:
+            if game_state[i+5]==False and game_state[i+15]==False and game_state[i+10] is None:
+                return i+10
+            if game_state[i+5]==False and game_state[i+10]==False and game_state[i+15] is None:
+                return i+15
+            if game_state[i+10]==False and game_state[i+15]==False and game_state[i+5] is None:
+                return i+5 
+        if i==0 or i==4:
+            if game_state[i+x]==False and game_state[i+2*x]==False and game_state[i+3*x] is None:
+                return i+3*x
+            if game_state[i+2*x]==False and game_state[i+3*x]==False and game_state[i+x] is None:
+                return i+x                         
+            if game_state[i+x]==False and game_state[i+3*x]==False and game_state[i+2*x] is None:
+                return i+2*x                                                              
+    #choose move
+    possiblemove=[]
+    for i in range(0,25):
+        if game_state[i] is None:
+            possiblemove.append(i)
+    corneropen=[]        
+    for i in possiblemove:
+        if i in (0,4,20,24):
+            corneropen.append(i)
+    if len(corneropen)>0 :                
+       random_corner=random.choice(corneropen)
+       return random_corner
+    if 12 in possiblemove:
+        return 12
+    side1open=[]        
+    for i in possiblemove:
+        if i in (7,11,13,17):
+            side1open.append(i)
+    if len(side1open)>0 :                
+       random_side1=random.choice(side1open)
+       return random_side1
+
+    side2open=[]        
+    for i in possiblemove:
+        if i in (6,8,16,18):
+            side2open.append(i)
+    if len(side2open)>0 :                
+       random_side2=random.choice(side2open)
+       return random_side2
+
+    side3open=[]        
+    for i in possiblemove:
+        if i in (1,3,5,9,15,19,21,23):
+            side3open.append(i)
+    if len(side3open)>0 :                
+       random_side3=random.choice(side3open)
+       return random_side3        
+
+    side4open=[]        
+    for i in possiblemove:
+        if i in (2,10,14,22):
+            side4open.append(i)
+    if len(side4open)>0 :                
+       random_side4=random.choice(side4open)
+       return random_side4         
+  
+    
